@@ -8,7 +8,7 @@ Chat room server with Token Authentication
 
     npm install
 
-    npm start
+    npm run start
 
 Authenicate your user and copy the returned token .
 Add the JWT Token in all subsequent requests to the server.

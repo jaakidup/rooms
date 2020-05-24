@@ -30,6 +30,17 @@ router.get("/", async (req, res) => {
     res.status(status.OK).json(rooms)
 })
 
+router.get("/user/:username", async (req, res) => {
+    const user = await User.findOne({username: req.params.username})
+    if (!user) return res.status(status.NOT_FOUND).send("User Not Found")
+
+    const rooms = await Room.find({participants: user._id})
+    if (rooms.length < 1) return res.status(status.NOT_FOUND).send("User Not Found in any rooms")
+    res.status(status.OK).json(rooms)
+})
+
+
+
 // Change Room Host
 router.post('/:roomid',verifyToken , async (req, res) => {
 
