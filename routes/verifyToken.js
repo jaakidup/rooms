@@ -8,8 +8,7 @@ function verifyToken(req, res, next) {
     const token = header.split(" ")[1]
 
     try {        
-        const tokenSecret = process.env.TOKEN_SECRET || "ThisIsMySuperSecretTokenSecret";
-        const verified = jwt.verify(token, tokenSecret);
+        const verified = jwt.verify(token, process.env.TOKEN_SECRET);
         req.user = verified;
         next();
     } catch (error) {

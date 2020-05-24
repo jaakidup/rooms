@@ -1,8 +1,5 @@
-# Jaakit MongoExpressJWT
-
-Mongo + Express + JWT starter template 
-
+# Rooms
 
 
 run 
-npm install
+npm install, npm start, restTest.rest

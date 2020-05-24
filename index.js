@@ -10,11 +10,7 @@ const roomsRoute = require("./routes/rooms");
 
 dotenv.config();
 
-
-const dbstring = process.env.DB_CONNECT || "mongodb+srv://project86:project86@cluster0-el0dv.mongodb.net/test?retryWrites=true&w=majority";
-
-
-mongoose.connect(dbstring,
+mongoose.connect(process.env.DB_CONNECT,
     { useNewUrlParser: true },
     () => console.log("Connected to DB")
 );
