@@ -6,25 +6,21 @@ const jwt = require("jsonwebtoken");
 const verifyToken = require("./verifyToken");
 
 
-
-
-
-
-
-
+// Get one user
 router.get("/:username", async (req, res) => {
     const user = await User.findOne({username: req.params.username})
     if (!user) return res.status(status.NOT_FOUND).send("User Not Found")
     res.status(status.OK).json(user)
 })
 
+// Get all users
 router.get("/", async (req, res) => {
     const users = await User.find()
-    if (users.length == 0) return res.status(status.NO_CONTENT).send("No Users Found")
+    if (users.length == 0) return res.status(status.NOT_FOUND).send("No Users Found")
     res.status(status.OK).json(users)
 })
 
-
+// Update user
 router.patch('/',verifyToken , async (req, res) => {
 
     let user = await User.findOne({_id: req.user._id})
@@ -47,6 +43,7 @@ router.patch('/',verifyToken , async (req, res) => {
 
 });
 
+// Delete user
 router.delete('/',verifyToken , async (req, res) => {
 
     let deleted = await User.deleteOne({_id: req.user._id})
@@ -58,7 +55,7 @@ router.delete('/',verifyToken , async (req, res) => {
 
 
 
-
+// Register new user
 router.post('/register', async (req, res) => {
 
     const userExists = await User.findOne({email: req.body.email})
@@ -83,6 +80,8 @@ router.post('/register', async (req, res) => {
 
 });
  
+// Login user 
+// Issue a Token
 router.post("/login", async (req, res) => {
 
     const user = await User.findOne({email: req.body.email})
