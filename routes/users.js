@@ -38,7 +38,7 @@ router.patch('/',verifyToken , async (req, res) => {
         let saved = await user.save()
         res.status(status.ACCEPTED).json(saved)
     } catch (error) {
-        res.status(status.BAD_REQUEST).send(error)
+        res.status(status.INTERNAL_SERVER_ERROR).send(error)
     }
 
 });
@@ -47,9 +47,9 @@ router.patch('/',verifyToken , async (req, res) => {
 router.delete('/',verifyToken , async (req, res) => {
 
     let deleted = await User.deleteOne({_id: req.user._id})
-    if(deleted.deletedCount == 0) return res.status(status.BAD_REQUEST).send("Not deleted")
+    if(deleted.deletedCount == 0) return res.status(status.INTERNAL_SERVER_ERROR).send("Not deleted")
     if(deleted.deletedCount == 1) return res.status(status.ACCEPTED).send("User Deleted")
-    res.status(status.BAD_REQUEST).send("User not deleted")
+    res.status(status.BAD_REINTERNAL_SERVER_ERRORQUEST).send("User not deleted")
     
 });
 
@@ -75,7 +75,7 @@ router.post('/register', async (req, res) => {
         const savedUser = await user.save()      
         res.status(status.CREATED).json(savedUser) 
     } catch (error) {
-        res.status(status.BAD_REQUEST).send(error)
+        res.status(status.INTERNAL_SERVER_ERROR).send(error)
     }
 
 });

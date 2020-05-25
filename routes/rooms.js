@@ -18,7 +18,7 @@ router.post("/", verifyToken, async (req, res) => {
         let savedRoom = await room.save()
         res.status(status.OK).send(savedRoom)
     } catch (error) {
-        res.status(status.BAD_REQUEST).send("Room not created")
+        res.status(status.INTERNAL_SERVER_ERROR).send("Room not created")
     }
 })
 
@@ -61,7 +61,7 @@ router.post('/:roomid',verifyToken , async (req, res) => {
         let savedRoom = await room.save()
         res.status(status.OK).json(savedRoom)
     } catch (error) {
-        res.status(status.BAD_REQUEST).send("Update host failed")
+        res.status(status.INTERNAL_SERVER_ERROR).send("Update host failed")
     }
 });
 
@@ -89,7 +89,7 @@ router.post("/:roomid/join", verifyToken, async (req, res) => {
             let updatedRoom = await room.save()
             res.status(status.OK).send("Joined room")
         } catch (error) {
-            res.status(status.BAD_REQUEST).send("Couldn't update room")
+            res.status(status.INTERNAL_SERVER_ERROR).send("Couldn't update room")
         }
 
     
@@ -113,7 +113,7 @@ router.post("/:roomid/leave", verifyToken, async (req, res) => {
         let updatedRoom = await room.save()
         res.status(status.OK).send("User Left room")
     } catch (error) {
-        res.status(status.BAD_REQUEST).send("Couldn't update room")
+        res.status(status.INTERNAL_SERVER_ERROR).send("Couldn't update room")
     } 
 })
 
